@@ -35,12 +35,13 @@ int main() {
     cout << endl;
 
     do { 
+        clearScreen();
         // Display the current time in both 12-hour and 24-hour formats
         initialTime.displayClocks();
         displayMenu();      // Show the menu options
 
         cin >> choice;      // Take user input for menu selection
-        if (cin.fail()) {       // Check if the input is integer
+        if (cin.fail() || choice < 1 || choice > 4) {       // Check if the input is integer, and within the range of 1-4
             cin.clear();        // Clear the error flag
             cin.ignore(numeric_limits<streamsize>::max(), '\n');        //Clear the rest of input
             cout << "Invalid choice. Please enter any number between 1 - 4." << endl;
