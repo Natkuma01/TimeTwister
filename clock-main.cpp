@@ -1,12 +1,13 @@
 #include <iostream>
-#include "clock.hpp"
-#include "clock.cpp"
-#include <thread>
-#include <chrono>
+#include "clock.hpp"        // Include the header for the Clock class
+#include "clock.cpp"        // Include the implementation of the Clock class
+#include <thread>           // for pausing execution
+#include <chrono>           // for time-related functions
 using namespace std;
 
 
 void displayMenu() {
+    // Display a menu for user interaction
     cout << "***************************" << endl;
     cout << "*  1 - Add One Hour       *" << endl;
     cout << "*  2 - Add One Minute     *" << endl;
@@ -23,49 +24,53 @@ int main() {
     int second;
     int choice;
 
+    // Prompt the user to enter initial values for hour, minute, and second
     hour = validateInput("Enter the initial hour: ", 0 ,23);
     minute = validateInput("Enter the initial minute: ", 0 ,59);
     second = validateInput("Enter the initial second: ", 0 ,59);
 
-    Clock initialTime(hour, minute, second);
+    Clock initialTime(hour, minute, second);    // Create a Clock object with the initial time values
     
 
     cout << endl;
 
     do { 
-        
+        // Display the current time in both 12-hour and 24-hour formats
         initialTime.displayClocks();
-        displayMenu();
+        displayMenu();      // Show the menu options
 
-        cin >> choice;
-        if (cin.fail()) {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin >> choice;      // Take user input for menu selection
+        if (cin.fail()) {       // Check if the input is integer
+            cin.clear();        // Clear the error flag
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');        //Clear the rest of input
             cout << "Invalid choice. Please enter any number between 1 - 4." << endl;
-            this_thread::sleep_for(chrono::seconds(1));
-            continue;
+            // Pause for 1 second before continuing
+            // Purpose: allow user to follow the program's actions in a more manageable pace
+            this_thread::sleep_for(chrono::seconds(1));     
+            continue;       // Skip the rest of the loop and start over
         }
         switch(choice) {
             case 1:
-            initialTime.addHour();
+            initialTime.addHour();      // Add one hour to the time
             break;
             case 2:
-            initialTime.addMinute();
+            initialTime.addMinute();    // Add one minute to the time
             break;
             case 3:
-            initialTime.addSecond();
+            initialTime.addSecond();    // Add one second to the time
             break;
             case 4:
+            // Exit the program and display a farewell message
             clearScreen();
             cout << "Exiting the program..." << endl;
-            this_thread::sleep_for(chrono::seconds(1));
+            this_thread::sleep_for(chrono::seconds(1));     // Pause 1 second before exiting
             cout << "GoodBye!" << endl;
             break;
             default:
             cout << "Invalid choice." << endl;
             break;
         }
-    } while (choice !=4);
+    } while (choice !=4);   // Repeat the loop until the user chooses to exit
 
     return 0;
 }
