@@ -1,3 +1,13 @@
+/*
+* Date: 3/26/2025
+* Student name: Shimin Chan
+* Purpose of the project: 
+* This program simulates a digital clock that allows the 
+* user to set an initial time and interactively adjust hours, minutes, 
+* and seconds while displaying both 12-hour and 24-hour formats.
+*/
+#pragma once        // ensure this file is included one time during compilation
+
 #ifndef CLOCK_H     // Include guard to prevent multiple inclusions of this header file
 #define CLOCK_H
 

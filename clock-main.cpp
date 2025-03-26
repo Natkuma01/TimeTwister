@@ -1,10 +1,24 @@
+/*
+* Date: 3/26/2025
+* Student name: Shimin Chan
+* Purpose of the project: 
+* This program simulates a digital clock that allows the 
+* user to set an initial time and interactively adjust hours, minutes, 
+* and seconds while displaying both 12-hour and 24-hour formats.
+*/
+
+
 #include <iostream>
 #include "clock.hpp"        // Include the header for the Clock class
-#include "clock.cpp"        // Include the implementation of the Clock class
 #include <thread>           // for pausing execution
 #include <chrono>           // for time-related functions
 using namespace std;
 
+// declare all functions
+void displayMenu();
+void runClockProgram(Clock& initialTime);
+int validateInput(string prompt, int min, int max);
+void clearScreen();
 
 void displayMenu() {
     // Display a menu for user interaction
@@ -17,22 +31,9 @@ void displayMenu() {
     cout << "Please make your selection: ";
 }
 
-
-int main() {
-    int hour;
-    int minute;
-    int second;
+// Function to run the main clock interaction loop
+void runClockProgram(Clock& initialTime) {
     int choice;
-
-    // Prompt the user to enter initial values for hour, minute, and second
-    hour = validateInput("Enter the initial hour: ", 0 ,23);
-    minute = validateInput("Enter the initial minute: ", 0 ,59);
-    second = validateInput("Enter the initial second: ", 0 ,59);
-
-    Clock initialTime(hour, minute, second);    // Create a Clock object with the initial time values
-    
-
-    cout << endl;
 
     do { 
         clearScreen();
@@ -72,6 +73,26 @@ int main() {
             break;
         }
     } while (choice !=4);   // Repeat the loop until the user chooses to exit
+
+}
+
+int main() {
+    int hour;
+    int minute;
+    int second;
+    int choice;
+
+    // Prompt the user to enter initial values for hour, minute, and second
+    hour = validateInput("Enter the initial hour: ", 0 ,23);
+    minute = validateInput("Enter the initial minute: ", 0 ,59);
+    second = validateInput("Enter the initial second: ", 0 ,59);
+
+    Clock initialTime(hour, minute, second);    // Create a Clock object with the initial time values
+
+    cout << endl;
+
+    // Start the clock program
+    runClockProgram(initialTime);
 
     return 0;
 }

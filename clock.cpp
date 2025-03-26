@@ -1,11 +1,20 @@
+/*
+* Date: 3/26/2025
+* Student name: Shimin Chan
+* Purpose of the project: 
+* This program simulates a digital clock that allows the 
+* user to set an initial time and interactively adjust hours, minutes, 
+* and seconds while displaying both 12-hour and 24-hour formats.
+*/
+
 #include "clock.hpp"
 #include <iomanip>      // required for setw() and setfill()
 
 // Constructor to initialize the clock with hour, minute, and second
-Clock::Clock(int h, int m, int s) {
-    hour = h;
-    minute = m;
-    second = s;
+Clock::Clock(int hours, int minutes, int seconds) {
+    hour = hours;
+    minute = minutes;
+    second = seconds;
 }
 
 // Function to validate user input, ensuring it is within a specified range
@@ -40,10 +49,8 @@ void Clock::displayClocks(){
 
     // Convert hour to 12-hour format
     hour12 = (hour % 12 == 0) ? 12 : hour % 12;
-    string amPm = hour > 12 ? "PM" : "AM";      // Determine AM/PM based on the hour
-    if (hour < 10 || hour12 < 10 || minute < 10 || second < 10) {
-        
-    }
+    string amPm = hour >= 12 ? "PM" : "AM";      // Determine AM/PM based on the hour
+                                                // changed operator to '>=', when it is noon, it will change to PM instead of AM
 
     // Format and display the time in both 12-hour and 24-hour formats
     cout << "***************************      ***************************" << endl;     // 27*
