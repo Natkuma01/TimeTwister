@@ -1,12 +1,3 @@
-/*
-* Date: 3/26/2025
-* Student name: Shimin Chan
-* Purpose of the project: 
-* This program simulates a digital clock that allows the 
-* user to set an initial time and interactively adjust hours, minutes, 
-* and seconds while displaying both 12-hour and 24-hour formats.
-*/
-
 #include "clock.hpp"
 #include <iomanip>      // required for setw() and setfill()
 
@@ -20,14 +11,14 @@ Clock::Clock(int hours, int minutes, int seconds) {
 // Function to validate user input, ensuring it is within a specified range
 int validateInput(string prompt, int min, int max) {
     int input;
-    bool isIntegerInRange = false;      // the input is not validated yet, so set it as false
+    bool isIntegerInRange = false;      
         while (!isIntegerInRange) {     
-            cout << prompt;     // Prompt user for input
-            cin >> input;       // Read the input
+            cout << prompt;     
+            cin >> input;      
 
             // Check if input is an integer
             if (cin.fail()) {
-                cin.clear();        // Clear the error flag
+                cin.clear();        
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');    // clear the rest of the input
                 cout << "Please enter a number." << endl;
                 continue;       // Prompt the user again
@@ -35,10 +26,10 @@ int validateInput(string prompt, int min, int max) {
             // Check if the input is within the valid range
             if (input < min || input >max) {
             cout << "Please enter a number between " << min << " and " << max << endl;
-            continue;       // Prompt the user again
+            continue;       
             }
         
-        return input;       // Return the valid input
+        return input;       
         }
     return 0;
 }
@@ -49,21 +40,19 @@ void Clock::displayClocks(){
 
     // Convert hour to 12-hour format
     hour12 = (hour % 12 == 0) ? 12 : hour % 12;
-    string amPm = hour >= 12 ? "PM" : "AM";      // Determine AM/PM based on the hour
-                                                // changed operator to '>=', when it is noon, it will change to PM instead of AM
+    string amPm = hour >= 12 ? "PM" : "AM";      
 
-    // Format and display the time in both 12-hour and 24-hour formats
     cout << "***************************      ***************************" << endl;     // 27*
     cout << "*     12-Hour Clock       *      *      24-Hour Clock      *" << endl;
     cout << "*      " 
-         << setw(2) << setfill('0') << hour12 << ":"        // Format hour in 12-hour clock
-         << setw(2) << setfill('0') << minute << ":"        // Format minute
-         << setw(2) << setfill('0') << second << " " << amPm << "        *";        // Format second
+         << setw(2) << setfill('0') << hour12 << ":"        
+         << setw(2) << setfill('0') << minute << ":"        
+         << setw(2) << setfill('0') << second << " " << amPm << "        *";        
     cout << "      ";     
     cout << "*         " 
-         << setw(2) << setfill('0') << hour << ":"          // Format hour in 24-hour clock
-         << setw(2) << setfill('0') << minute << ":"        // Format minute
-         << setw(2) << setfill('0') << second << "        *" << endl;               // Format second
+         << setw(2) << setfill('0') << hour << ":"          
+         << setw(2) << setfill('0') << minute << ":"        
+         << setw(2) << setfill('0') << second << "        *" << endl;               
     cout << "***************************      ***************************" << endl;     
 }
 
@@ -87,8 +76,8 @@ void Clock::addMinute() {
 
 // Function to add one second to the current time
 void Clock::addSecond() {
-    second = (second + 1) % 60;     // Add one second and ensure it wraps around at 60
-    if (second == 0) {          // If seconds reset to 0, increment the minute as well
+    second = (second + 1) % 60;     
+    if (second == 0) {          
         addMinute();
     }
 }
